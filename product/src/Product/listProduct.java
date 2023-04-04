@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@SuppressWarnings("all")
+
 public class listProduct {
     //PRODUCT LIST HELP
     void help(){
@@ -185,7 +187,7 @@ public class listProduct {
             }
         }
 
-        System.out.printf("%-5s %-10s %-20s %-10s %-15s %10s %10s\n", "id", "code", "name", "unit", "type", "price", "stock");
+        System.out.printf("%-5s %-10s %-20s %-10s %-8s %8s %12s %10s\n", "id", "code", "name", "unit", "type", "price", "expdate", "stock");
         try{
             resultSet = statement.executeQuery(Query);
             while (resultSet.next()) {
@@ -195,8 +197,9 @@ public class listProduct {
                 String unit = resultSet.getString("unit");
                 String type = resultSet.getString("type");
                 float price = resultSet.getFloat("price");
+                String date = String.valueOf(resultSet.getDate("expdate"));
                 float stock = resultSet.getFloat("stock");
-                System.out.printf("%-5s %-10s %-20s %-10s %-15s %10s %10s\n", id, code, name, unit, type, price, stock);
+                System.out.printf("%-5s %-10s %-20s %-10s %-8s %8s %12s %10s\n", id, code, name, unit, type, price, date, stock);
             }
         }catch(SQLException e){throw new RuntimeException(e);}
     }

@@ -14,6 +14,22 @@ type varchar(20) not null,
 price decimal(10,2)  not null,
 stock decimal(10,2) default 0);
 
+create table product (id serial primary key,
+code varchar(7) not null unique,
+name varchar(31) not null,
+unit varchar(10) not null,
+type varchar(20) not null,
+price decimal(10,2)  not null,
+expDate Date not null,
+stock decimal(10,2) default 0);
+
+insert into product (code, name, unit, type, price, expdate, stock) values ('da1', 'Milk','l', 'dairy', 35.00, '2023/04/05', 1.5);
+insert into product (code, name, unit, type, price, expdate, stock) values ('sn1', 'BananaChips','pack', 'snacks', 60.00, '2023/06/12', 15);
+insert into product (code, name, unit, type, price, expdate, stock) values ('sn2', 'Jim Jam','pack', 'snacks', 10.00, '2024/04/12', 25);
+insert into product (code, name, unit, type, price, expdate, stock) values ('sn3', 'Oreo','pack', 'snacks', 10.00, '2024/04/25', 30);
+
+
+
 drop table product;
 
 ALTER TABLE product RENAME COLUMN unitcode TO unit;

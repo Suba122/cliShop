@@ -1,5 +1,6 @@
 package Product;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,14 +50,16 @@ public class createProduct {
 
             //checking for stock
             boolean isStockGiven = false;
-            if(properties.length == 6) isStockGiven = true;
+            if(properties.length == 7) isStockGiven = true;
 
             //properties validation
             if(productInputValidation(properties[0], properties[1])){
                 //Insert product into database
 
-                if(isStockGiven) addProduct(statement, properties[0], properties[1], properties[2], properties[3], Double.parseDouble(properties[4]), Double.parseDouble(properties[5]));
-                else addProduct(statement, properties[0], properties[1], properties[2], properties[3], Double.parseDouble(properties[4]), 0);
+                //product create [code,name,unit,type,price,date,stock] [code,name,unit,type,price,date,stock] ...
+
+                if(isStockGiven) addProduct(statement, properties[0], properties[1], properties[2], properties[3], Double.parseDouble(properties[4]), properties[5], Double.parseDouble(properties[6]));
+                else addProduct(statement, properties[0], properties[1], properties[2], properties[3], Double.parseDouble(properties[4]), properties[5], 0);
 
             }else{
                 return;
@@ -78,10 +81,10 @@ public class createProduct {
         return true;
     }
 
-    void addProduct(Statement statement, String productCode, String productName, String unit, String type, double price, double stock) {
+    void addProduct(Statement statement, String productCode, String productName, String unit, String type, double price, String expDate, double stock) {
         try {
-            String sql = "INSERT INTO product (code, name, unit, type, price, stock) VALUES " +
-                    "('" + productCode + "', '" + productName + "', '" + unit + "', '" + type + "', " + price + ", " + stock + ")";
+            String sql = "INSERT INTO product (code, name, unit, type, price, expdate, stock) VALUES " +
+                    "('" + productCode + "', '" + productName + "', '" + unit + "', '" + type + "', " + price + ", '" + expDate + "', "+ stock + ")";
             statement.executeUpdate(sql);
         } catch (SQLException e) {System.out.println(e.getMessage()); return;}
     }

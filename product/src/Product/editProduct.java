@@ -43,7 +43,7 @@ public class editProduct {
 
         //Parameters needed from inputProcessing
         int id;
-        String code, name, unit, type;
+        String code, name, unit, type, expdate;
         double price, stock;
 
         //Splitting by [] to separate each product
@@ -73,6 +73,7 @@ public class editProduct {
                 else if(attribute.equals("name")) Query += "name='"+value+"'";
                 else if(attribute.equals("unit")) Query += "unit='"+value+"'";
                 else if(attribute.equals("type")) Query += "type='"+value+"'";
+                else if(attribute.equals("expdate")) Query += "expdate='"+value+"'";
                 else {
                     try {
                         if (attribute.equals("price")) Query += "price="+Double.parseDouble(value);
